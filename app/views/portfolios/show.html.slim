@@ -1,0 +1,36 @@
+.container
+  h3 Portfolio #{@portfolio.id} : #{@portfolio.name}
+  = form_for @portfolio do |f|
+    = hidden_field_tag :id, @portfolio.id
+    .row style="margin:15px"
+      .col
+        = f.text_field :name
+      .col
+        = f.text_field :description
+      .col
+        = submit_tag "Update"
+    .row.alert.alert-success style="margin:15px"
+      .container
+        - @portfolio.rules.each do |rule|
+          .row
+            .col
+              = rule.name
+            .col
+              = rule.category
+      .col
+        = link_to "assign rules"
+    .row
+      .container.bg-dark.text-white
+        .row
+          .col
+            h5
+              ="markets"
+          .col
+            - @markets.each do |mkt|
+              .row
+                .col
+                  span
+                    = label_tag( "market_#{mkt.trading_symbol}", mkt.trading_symbol )
+                    = check_box_tag('portfolio[markets][]', mkt.id, @portfolio.market_ids&.include?( mkt.id ), :id => "market_#{mkt.trading_symbol}")
+                .col
+                  = mkt.trading_market
