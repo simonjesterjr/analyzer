@@ -5,8 +5,4 @@ class Portfolio < ApplicationRecord
 
     attr_accessor :days, :days_count,
                   :max, :min
-
-
-
-
 end
