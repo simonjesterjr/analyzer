@@ -138,7 +138,7 @@ GEM
       connection_pool (>= 2)
       msgpack (>= 0.5)
       redis (>= 3.0, < 5.0)
-    msgpack (1.7.1)
+    msgpack (1.7.2)
     multi_xml (0.6.0)
     net-imap (0.3.6)
       date
@@ -249,11 +249,17 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stimulus-rails (1.2.1)
+      railties (>= 6.0.0)
     technical-analysis (0.2.4)
     temple (0.10.2)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     web-console (4.2.0)
@@ -292,13 +298,17 @@ DEPENDENCIES
   pry (~> 0.14.1)
   puma (~> 4.1)
   rails (~> 7.0.6, >= 7.0.6)
+  redis (~> 4.0)
   rspec-rails
   sass-rails
   selenium-webdriver
   slim-rails
   spring
   spring-watcher-listen
+  sprockets-rails
+  stimulus-rails
   technical-analysis
+  turbo-rails
   tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
