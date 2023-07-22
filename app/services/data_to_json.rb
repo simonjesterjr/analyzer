@@ -1,16 +1,22 @@
 class DataToJson
   attr_reader :portfolio, :symbol
-  attr_accessor :json_data, :data
+  attr_accessor :data
 
-  def initialize( portfolio, symbol )
-    @portfolio = portfolio
+  def initialize( csi_portfolio, symbol )
+    @portfolio = csi_portfolio
     @symbol = symbol
   end
 
-  def call(  )
+  def call
     @data = file_to_array
-    json_data = data.to_json
-    puts JSON.parse json_data
+  end
+
+  def results
+    data
+  end
+
+  def json_data
+    data.to_json
   end
 
   def file_to_array
