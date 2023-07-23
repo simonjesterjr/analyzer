@@ -18,6 +18,7 @@ class DataFromCsi
         hash.merge!( portfolio_id: @portfolio.id )
         mkt.activities << Activity.new( hash )
       end
+      yield "#{mkt.trading_symbol} loaded"
     end
   end
 

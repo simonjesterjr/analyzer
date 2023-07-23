@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_23_050227) do
     t.datetime "updated_at", null: false
     t.integer "portfolio_id"
     t.index ["date"], name: "index_activities_on_date"
-    t.index ["portfolio_id", "market_id"], name: "index_activities_on_portfolio_id_and_market_id", unique: true
+    t.index ["portfolio_id", "market_id", "date", "numeric_delivery_month"], name: "index_activities_on_portfolio_market_date_delivery", unique: true
   end
 
   create_table "markets", force: :cascade do |t|
