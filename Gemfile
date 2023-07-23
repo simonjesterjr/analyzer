@@ -77,7 +77,7 @@ gem 'httparty'
 gem 'interactor-rails'
 
 # data analysis
-gem 'technical-analysis'
+gem 'technical-analysis', '0.3.0', path: "/Users/johnkoisch/Documents/com/sawtooth-trading/technical-analysis/pkg/"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -12,12 +12,12 @@ class Market < ApplicationRecord
     {
       account_value: account_value,
       risk_dollars: percentage * account_value,
-      current_atr:  atr_val,
-      atr_tick_stop: atr_multiplier * atr_val,
-      current_atr_dollars: atr_val * normalized_tick,
-      atr_dollar_risk: atr_multiplier * atr_val * normalized_tick,
-      contracts: (atr_multiplier * atr_val * normalized_tick) / (percentage * account_value),
-      units: ((atr_multiplier * atr_val * normalized_tick) / (percentage * account_value)).floor
+      current_atr:  float_of_2_decimal( atr_val ),
+      atr_tick_stop: float_of_2_decimal( atr_multiplier * atr_val ),
+      current_atr_dollars: float_of_2_decimal( atr_val * normalized_tick ),
+      atr_dollar_risk: float_of_2_decimal( atr_multiplier * atr_val * normalized_tick ),
+      contracts: float_of_2_decimal( (percentage * account_value) / (atr_multiplier * atr_val * normalized_tick) ),
+      units: ( (percentage * account_value) / (atr_multiplier * atr_val * normalized_tick) ).floor
     }
   end
 
