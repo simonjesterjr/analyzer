@@ -15,6 +15,7 @@ class DataFromCsi
       existing = mkt.activities.pluck(:date)
       results = data.results.reject{ |d| existing.include?( d[:date] ) }
       results.each do |hash|
+        hash.merge!( portfolio_id: @portfolio.id )
         mkt.activities << Activity.new( hash )
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_214935) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_23_050227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "timescaledb"
@@ -29,6 +29,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_214935) do
     t.float "atr", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "portfolio_id"
+    t.index ["date"], name: "index_activities_on_date"
+    t.index ["portfolio_id", "market_id"], name: "index_activities_on_portfolio_id_and_market_id", unique: true
   end
 
   create_table "markets", force: :cascade do |t|
@@ -40,6 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_214935) do
     t.datetime "updated_at", null: false
     t.float "tick_size"
     t.float "tick_value"
+    t.index ["trading_symbol"], name: "index_markets_on_trading_symbol"
   end
 
   create_table "markets_portfolios", id: false, force: :cascade do |t|
@@ -94,6 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_214935) do
     t.float "stop"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "run_id"
+    t.integer "activity_id"
   end
 
 end
