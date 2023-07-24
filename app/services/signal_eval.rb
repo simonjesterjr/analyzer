@@ -7,7 +7,15 @@ class SignalEval
   end
 
   def call
-    Activity.history( portfolio.id, market.id ).order( date: :asc )
+    history do |activity|
+
+    end
+  end
+
+  def history
+    Activity.history( portfolio.id, market.id ).order( date: :asc ).each do |activity|
+      yield activity
+    end
   end
 
 end

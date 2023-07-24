@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_23_050227) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_011320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "timescaledb"
   enable_extension "timescaledb_toolkit"
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "portfolio_id"
+    t.integer "starting_capital"
+  end
 
   create_table "activities", force: :cascade do |t|
     t.integer "market_id"
@@ -32,6 +37,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_23_050227) do
     t.integer "portfolio_id"
     t.index ["date"], name: "index_activities_on_date"
     t.index ["portfolio_id", "market_id", "date", "numeric_delivery_month"], name: "index_activities_on_portfolio_market_date_delivery", unique: true
+  end
+
+  create_table "market_bollinger_bands", id: false, force: :cascade do |t|
+    t.timestamptz "time", null: false
+    t.integer "market_id", null: false
+    t.integer "portfolio_id", null: false
+    t.integer "activity_id", null: false
+    t.float "upper", default: 0.0
+    t.float "lower", default: 0.0
+    t.float "middle", default: 0.0
+  end
+
+  create_table "market_highs", id: false, force: :cascade do |t|
+    t.timestamptz "time", null: false
+    t.integer "market_id", null: false
+    t.integer "portfolio_id", null: false
+    t.integer "activity_id", null: false
+    t.float "high_close", default: 0.0
+    t.float "high_high", default: 0.0
+    t.float "low_close", default: 0.0
+    t.float "low_low", default: 0.0
+  end
+
+  create_table "market_moving_averages", id: false, force: :cascade do |t|
+    t.timestamptz "time", null: false
+    t.integer "market_id", null: false
+    t.integer "portfolio_id", null: false
+    t.integer "activity_id", null: false
+    t.float "ma_55"
+    t.float "ma_75"
+    t.float "ma_110"
   end
 
   create_table "markets", force: :cascade do |t|

@@ -1,13 +1,20 @@
 class Market < ApplicationRecord
   has_and_belongs_to_many :portfolios
   has_many :activities
+  has_many :market_moving_averages
+  has_many :market_bollinger_bands
+  has_many :market_highs
 
   enum period: [ :day, :week, :hour, :tick ]
 
   after_find :tick_update
 
-  def risk( account_value, percentage: 0.02, atr_multiplier: 2 )
+  def risk( account_value: nil, percentage: 0.02, atr_multiplier: 2 )
     raise StandardError.new( "No Activities loaded" ) if activities.size.zero?
+
+    unless account_value
+      account_value = portfolio.account.starting_capital/100
+    end
 
     normalized_tick = ( 1 / tick_size ) * tick_value
     atr_val = activities&.order( date: :asc ).last&.atr || 0
