@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_24_011320) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_022848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "timescaledb"
@@ -114,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_011320) do
     t.float "updated_stop"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "motivation", default: 0
   end
 
   create_table "rules", force: :cascade do |t|
@@ -125,13 +126,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_011320) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "signals", force: :cascade do |t|
+  create_table "trades", force: :cascade do |t|
+    t.integer "signal_id"
+    t.float "stop"
+    t.boolean "for_test"
     t.integer "units"
     t.string "action_description"
+    t.boolean "executed"
+    t.float "signal_price"
+    t.float "actual_price"
+    t.float "additional_fees"
+  end
+
+  create_table "trading_signals", force: :cascade do |t|
+    t.string "action_description"
     t.string "triggers"
-    t.boolean "test"
     t.integer "direction"
-    t.float "stop"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "run_id"

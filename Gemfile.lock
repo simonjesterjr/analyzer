@@ -251,7 +251,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    technical-analysis (0.3.0)
+    technical-analysis (0.3.2)
     temple (0.10.2)
     thor (1.2.2)
     tilt (2.2.0)
@@ -307,7 +307,7 @@ DEPENDENCIES
   spring-watcher-listen
   sprockets-rails
   stimulus-rails
-  technical-analysis (= 0.3.0)
+  technical-analysis (= 0.3.2)
   turbo-rails
   tzinfo-data
   web-console (>= 3.3.0)
